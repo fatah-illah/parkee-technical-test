@@ -1,8 +1,8 @@
 -- Create the database (if not exists)
-CREATE DATABASE parking_system;
+-- CREATE DATABASE parking_system;
 
 -- Connect to the database
-\c parking_system;
+-- \c parking_system;
 
 -- Members table
 CREATE TABLE members (
@@ -28,7 +28,7 @@ CREATE TABLE parking_tickets (
                                  slip_number VARCHAR(20),
                                  check_in_time TIMESTAMP NOT NULL,
                                  check_out_time TIMESTAMP,
-                                 duration INTERVAL,
+                                 duration BIGINT,
                                  gate_system VARCHAR(50),
                                  status VARCHAR(20) DEFAULT 'active',
                                  FOREIGN KEY (vehicle_id) REFERENCES vehicles(vehicle_id)
