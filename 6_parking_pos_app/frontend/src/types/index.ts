@@ -10,14 +10,16 @@ export interface ParkingTicket {
 }
 
 export interface CheckInRequest {
-  licensePlate: string;
+  plateNumber: string;
   vehicleType: string;
-  driverName: string;
-  phoneNumber?: string;
+  slipNumber: string;
+  gateSystem: string;
 }
 
 export interface CheckOutRequest {
-  ticketId: number;
+  plateNumber: string;
+  paymentMethod: string;
+  voucherCode?: string;
 }
 
 export interface Payment {
