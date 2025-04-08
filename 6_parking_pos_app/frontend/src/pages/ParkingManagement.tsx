@@ -71,7 +71,7 @@ const ParkingManagement: React.FC = () => {
         const formData = new FormData();
         formData.append('exitCameraImage', exitCameraImage);
         formData.append('faceExitCameraImage', faceExitCameraImage);
-        await api.post(`/camera/exit/${response.data.id}`, formData, {
+        await api.post(`/camera/exit/${response.data.ticketId}`, formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
         });
       }
@@ -244,11 +244,11 @@ const ParkingManagement: React.FC = () => {
         <div className="bg-white shadow overflow-hidden sm:rounded-md">
           <ul className="divide-y divide-gray-200">
             {activeTickets.map((ticket) => (
-              <li key={ticket.id} className="px-6 py-4 hover:bg-gray-50">
+              <li key={ticket.ticketId} className="px-6 py-4 hover:bg-gray-50">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-gray-900">
-                      Ticket #{ticket.id} - {ticket.licensePlate}
+                      Ticket #{ticket.ticketId} - {ticket.licensePlate}
                     </p>
                     <p className="text-sm text-gray-500">
                       Entry Time: {new Date(ticket.entryTime).toLocaleString()}

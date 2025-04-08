@@ -1,5 +1,5 @@
 export interface ParkingTicket {
-  id: number;
+  ticketId: number;
   licensePlate: string;
   vehicleType: string;
   entryTime: string;
