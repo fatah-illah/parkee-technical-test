@@ -16,20 +16,16 @@ public class CameraCapture {
     @JoinColumn(name = "ticket_id")
     private ParkingTicket ticket;
 
-    @Lob
-    @Column(columnDefinition = "bytea")
+    @Column(name = "entry_camera_img", columnDefinition = "bytea")
     private byte[] entryCameraImg;
 
-    @Lob
-    @Column(columnDefinition = "bytea")
+    @Column(name = "exit_camera_img", columnDefinition = "bytea")
     private byte[] exitCameraImg;
 
-    @Lob
-    @Column(columnDefinition = "bytea")
+    @Column(name = "face_entry_camera_img", columnDefinition = "bytea")
     private byte[] faceEntryCameraImg;
 
-    @Lob
-    @Column(columnDefinition = "bytea")
+    @Column(name = "face_exit_camera_img", columnDefinition = "bytea")
     private byte[] faceExitCameraImg;
 
     private LocalDateTime captureTime;

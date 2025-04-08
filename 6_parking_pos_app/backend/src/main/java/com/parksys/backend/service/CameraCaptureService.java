@@ -8,7 +8,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class CameraCaptureService {
 
@@ -21,6 +23,9 @@ public class CameraCaptureService {
     public CameraCapture saveEntryCameraCapture(ParkingTicket ticket,
                                                 MultipartFile entryCameraImage,
                                                 MultipartFile faceEntryCameraImage) throws IOException {
+        log.info("Entry file size: {}", entryCameraImage.getSize());
+        log.info("Face entry file size: {}", faceEntryCameraImage.getSize());
+
         CameraCapture capture = new CameraCapture();
         capture.setTicket(ticket);
         capture.setEntryCameraImg(entryCameraImage.getBytes());
