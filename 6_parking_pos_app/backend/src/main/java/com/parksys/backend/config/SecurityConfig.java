@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
@@ -27,6 +27,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/members/**").hasRole("ADMIN")
                         .requestMatchers("/api/reports/**").hasAnyRole("MANAGER", "ADMIN")
                         .requestMatchers("/api/camera/**").hasAnyRole("OPERATOR", "ADMIN")
+                        .requestMatchers("/api/me").authenticated()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(basic -> {})
@@ -39,19 +40,19 @@ public class SecurityConfig {
     public InMemoryUserDetailsManager userDetailsService() {
         UserDetails operator = User.builder()
                 .username("operator")
-                .password(passwordEncoder().encode("password"))
+                .password("{noop}password")
                 .roles("OPERATOR")
                 .build();
 
         UserDetails manager = User.builder()
                 .username("manager")
-                .password(passwordEncoder().encode("password"))
+                .password("{noop}password")
                 .roles("MANAGER")
                 .build();
 
         UserDetails admin = User.builder()
                 .username("admin")
-                .password(passwordEncoder().encode("password"))
+                .password("{noop}password")
                 .roles("ADMIN")
                 .build();
 
@@ -60,6 +61,6 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }

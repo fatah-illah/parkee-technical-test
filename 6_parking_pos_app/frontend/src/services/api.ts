@@ -32,18 +32,16 @@ api.interceptors.response.use(
         return response;
     },
     (error) => {
-        if (error.response?.status === 401) {
+        const isLoginRequest = error.config?.url?.includes('/login') || error.config?.url?.includes('/me');
+
+        if (error.response?.status === 401 && !isLoginRequest) {
             console.log('Unauthorized access, redirecting to login');
             localStorage.removeItem('username');
             localStorage.removeItem('password');
             window.location.href = '/login';
-        }
-
-        else if (error.response?.status === 500) {
+        } else if (error.response?.status === 500) {
             console.error('Server error:', error.response.data);
-        }
-
-        else if (error.code === 'ECONNABORTED' || !error.response) {
+        } else if (error.code === 'ECONNABORTED' || !error.response) {
             console.error('Network error or timeout');
         }
 
